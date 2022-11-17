@@ -6,11 +6,12 @@ import { useContainer } from 'class-validator';
 import { join } from 'path';
 import { AppModule } from './app.module';
 
-import express from 'express';
+import *  express from 'express';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  app.enableCors();
+  const app = await NestFactory.create<NestExpressApplication>(AppModule,{cors:true});
+  var whitelist = ['http://localhost:3000/', 'http://146.190.93.23'];
+
   // app.set('trust proxy', 1); // trust first proxy
   // app.use(
   //   session({
@@ -29,9 +30,9 @@ async function bootstrap() {
       whitelist: true,
     }),
   );
-
-  app.useStaticAssets(join(__dirname, '..', 'public'));
-  app.setBaseViewsDir(join(__dirname, '..', 'views'));
+app.use( express.static(join(__dirname,  '../public')));
+ //app.useStaticAssets(join(__dirname, '..', 'public'));
+ // app.setBaseViewsDir(join(__dirname, '..', 'views'));
   app.setViewEngine('ejs');
 
   const swaggerConfig = new DocumentBuilder()
