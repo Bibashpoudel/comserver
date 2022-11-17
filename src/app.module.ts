@@ -9,10 +9,7 @@ import { ContactUsModule } from './contactus/contact.module';
   imports: [
     ContactUsModule,
     ConfigModule.forRoot({ isGlobal: true }),
-    MongooseModule.forRoot('mongodb://localhost/company'),
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'public'),
-    }),
+    MongooseModule.forRoot('mongodb://localhost:27017/company'),
   ],
 })
 export class AppModule implements NestModule {
