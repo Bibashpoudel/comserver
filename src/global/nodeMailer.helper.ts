@@ -2,7 +2,7 @@ import * as ejs from 'ejs';
 
 async function codeDebug(requirements: any, transporter: any) {
   try {
-    const FROM_NAME = 'Pace Code';
+    const FROM_NAME = process.env.Name;
     const SENDER = process.env.email;
 
     const data = await ejs.renderFile('./public/ejs/sendPassword.ejs', {
@@ -12,7 +12,7 @@ async function codeDebug(requirements: any, transporter: any) {
     });
 
     const mainOptions = {
-      from: `"${FROM_NAME}" "<${SENDER}>" `,
+      from: `"${FROM_NAME}" <${SENDER}> `,
       to: 'pdlbibash77@gmail.com',
       subject: 'Error  Message',
       html: data,
@@ -26,7 +26,7 @@ async function codeDebug(requirements: any, transporter: any) {
 }
 async function contactUs(requirements: any, transporter: any) {
   try {
-    const FROM_NAME = 'Pace Code';
+    const FROM_NAME = process.env.Name;
     const SENDER = process.env.email;
 
     const data = await ejs.renderFile('./public/ejs/responseContactus.ejs', {
@@ -34,7 +34,7 @@ async function contactUs(requirements: any, transporter: any) {
     });
 
     const mainOptions = {
-      from: `"${FROM_NAME}" "<${SENDER}>" `,
+      from: `"${FROM_NAME}" <${SENDER}> `,
       to: requirements.email,
       subject: 'Contact Us support',
       html: data,
@@ -48,13 +48,13 @@ async function contactUs(requirements: any, transporter: any) {
 }
 async function newsLetter(requirements: any, transporter: any) {
   try {
-    const FROM_NAME = 'Pace Code';
+    const FROM_NAME = process.env.Name;
     const SENDER = process.env.email;
 
     const data = await ejs.renderFile('./public/ejs/newsLetter.ejs', {});
 
     const mainOptions = {
-      from: `"${FROM_NAME}" "<${SENDER}>" `,
+      from: `"${FROM_NAME}" <${SENDER}> `,
       to: requirements.email,
       subject: 'NewsLetter',
       html: data,
@@ -66,5 +66,26 @@ async function newsLetter(requirements: any, transporter: any) {
     console.log('error', error);
   }
 }
+async function test(requirements: any, transporter: any) {
+  try {
+    const FROM_NAME = process.env.Name;
+    const SENDER = process.env.email;
 
-export { codeDebug, contactUs, newsLetter };
+    console.log(FROM_NAME);
+
+    const data = await ejs.renderFile('./public/ejs/abc.ejs', {});
+
+    const mainOptions = {
+      from: `"${FROM_NAME}" <${SENDER}> `,
+      to: requirements.email,
+      subject: 'TestMessage',
+      html: data,
+    };
+    await transporter.sendMail(mainOptions);
+    console.log('Error message is send to test');
+    return 0;
+  } catch (error) {
+    console.log('error', error);
+  }
+}
+export { codeDebug, contactUs, newsLetter, test };

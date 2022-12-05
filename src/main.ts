@@ -7,12 +7,19 @@ import { join } from 'path';
 import { AppModule } from './app.module';
 
 import * as express from 'express';
+import { nodeMailer } from './global/nodeMailer';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     cors: true,
   });
- 
+
+ // app.enableCors({
+  //  origin: '*',
+//  });
+  console.log('called');
+  //nodeMailer({ email: 'pdlbibash77@gmail.com', fullName: 'Bibash' }, 'test');
+
   // app.set('trust proxy', 1); // trust first proxy
   // app.use(
   //   session({

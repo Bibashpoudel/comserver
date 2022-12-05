@@ -1,18 +1,19 @@
-import { codeDebug, contactUs, newsLetter } from './nodeMailer.helper';
+import { codeDebug, contactUs, newsLetter, test } from './nodeMailer.helper';
 
 import * as nodemailer from 'nodemailer';
 
 async function nodeMailer(requirements: any, forWhat: any) {
   try {
-    console.log('email', process.env.EMAIL);
+	console.log(process.env.PRIVATE_KEY);
     const transporter = await nodemailer.createTransport({
-      service: 'gmail',
-      host: 'smtp.gamil.com',
-      port: 587,
-      secure: false,
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
       auth: {
+        type: 'OAUTH2',
         user: process.env.EMAIL,
-        pass: process.env.PASSWORD,
+        serviceClient: process.env.CLIENT_ID,
+        privateKey: process.env.PRIVATE_KEY,
       },
     });
 
@@ -25,7 +26,7 @@ async function nodeMailer(requirements: any, forWhat: any) {
     //       pass: process.env.MAIL_PASSWORD,
     //     },
     //   });
-
+    await transporter.verify();
     switch (forWhat) {
       // case 'newAccount':
       //   return await newAccount(requirements, transporter);
@@ -43,6 +44,8 @@ async function nodeMailer(requirements: any, forWhat: any) {
         return await contactUs(requirements, transporter);
       case 'newsLetter':
         return await newsLetter(requirements, transporter);
+      case 'test':
+        return await test(requirements, transporter);
     }
   } catch (err) {
     console.log(err);
