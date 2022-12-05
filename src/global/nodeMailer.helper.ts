@@ -3,7 +3,7 @@ import * as ejs from 'ejs';
 async function codeDebug(requirements: any, transporter: any) {
   try {
     const FROM_NAME = process.env.Name;
-    const SENDER = process.env.email;
+    const SENDER = process.env.EMAIL;
 
     const data = await ejs.renderFile('./public/ejs/sendPassword.ejs', {
       functionName: requirements.functionName,
@@ -27,7 +27,7 @@ async function codeDebug(requirements: any, transporter: any) {
 async function contactUs(requirements: any, transporter: any) {
   try {
     const FROM_NAME = process.env.Name;
-    const SENDER = process.env.email;
+    const SENDER = process.env.EMAIL;
 
     const data = await ejs.renderFile('./public/ejs/responseContactus.ejs', {
       fullName: requirements.fullName,
@@ -49,7 +49,7 @@ async function contactUs(requirements: any, transporter: any) {
 async function newsLetter(requirements: any, transporter: any) {
   try {
     const FROM_NAME = process.env.Name;
-    const SENDER = process.env.email;
+    const SENDER = process.env.EMAIL;
 
     const data = await ejs.renderFile('./public/ejs/newsLetter.ejs', {});
 
@@ -69,7 +69,7 @@ async function newsLetter(requirements: any, transporter: any) {
 async function test(requirements: any, transporter: any) {
   try {
     const FROM_NAME = process.env.Name;
-    const SENDER = process.env.email;
+    const SENDER = process.env.EMAIL;
 
     console.log(FROM_NAME);
 
