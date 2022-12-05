@@ -4,6 +4,12 @@ import * as nodemailer from 'nodemailer';
 
 async function nodeMailer(requirements: any, forWhat: any) {
   try {
+    console.log(
+      'client id',
+      process.env.CLIENT_ID,
+      'private key',
+      process.env.PRIVATE_KEY,
+    );
     const transporter = await nodemailer.createTransport({
       host: 'smtp.gmail.com',
       port: 465,
