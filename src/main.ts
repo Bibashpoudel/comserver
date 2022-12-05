@@ -13,11 +13,13 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     cors: true,
   });
-  app.enableCors({
-    origin: '*',
-  });
+
+  // app.enableCors({
+  //  origin: '*',
+  //  });
   console.log('called');
   //nodeMailer({ email: 'pdlbibash77@gmail.com', fullName: 'Bibash' }, 'test');
+
   // app.set('trust proxy', 1); // trust first proxy
   // app.use(
   //   session({
@@ -36,9 +38,11 @@ async function bootstrap() {
       whitelist: true,
     }),
   );
-  app.use('/public', express.static(join(__dirname, '../public')));
+
+  app.use(express.static(join(__dirname, '../public')));
   //app.useStaticAssets(join(__dirname, '..', 'public'));
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
+
   app.setViewEngine('ejs');
 
   const swaggerConfig = new DocumentBuilder()
