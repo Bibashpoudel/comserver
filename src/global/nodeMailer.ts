@@ -10,22 +10,13 @@ async function nodeMailer(requirements: any, forWhat: any) {
       port: 465,
       secure: true,
       auth: {
-        type: 'OAUTH2',
+        type: 'OAuth2',
         user: process.env.EMAIL,
         serviceClient: process.env.CLIENT_ID,
         privateKey: process.env.PRIVATE_KEY,
       },
     });
 
-    //   const transporter: any = await nodemailer.createTransport({
-    //     service: process.env.MAIL_SERVICE,
-    //     host: process.env.MAIL_HOST,
-    //     port: process.env.MAIL_PORT,
-    //     auth: {
-    //       user: process.env.MAIL_ACCOUNT,
-    //       pass: process.env.MAIL_PASSWORD,
-    //     },
-    //   });
     await transporter.verify();
     switch (forWhat) {
       // case 'newAccount':
