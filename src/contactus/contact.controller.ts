@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Request, Response } from '@nestjs/common';
+import { Body, Controller, Get, Post, Request, Response } from '@nestjs/common';
 import { ContactService } from './contact.service';
 import { ContactUsDto, NewsLetterDto } from './dto';
 
@@ -14,6 +14,10 @@ export class ContactController {
   ): Promise<any> {
     return this.contactService.addContactUs(res, req, dto);
   }
+  @Get('/message')
+  async getContactUs(@Response() res: any, @Request() req: any): Promise<any> {
+    return this.contactService.getContactUS(res, req);
+  }
   @Post('/news-letter')
   async addNewsLetter(
     @Response() res: any,
@@ -21,5 +25,10 @@ export class ContactController {
     @Body() dto: NewsLetterDto,
   ): Promise<any> {
     return this.contactService.addNewsLetter(res, req, dto);
+  }
+
+  @Get('/news-letter/users')
+  async getNewsLetter(@Response() res: any, @Request() req: any): Promise<any> {
+    return this.contactService.getNewsLetter(res, req);
   }
 }
