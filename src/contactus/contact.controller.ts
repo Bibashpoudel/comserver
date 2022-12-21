@@ -16,6 +16,7 @@ export class ContactController {
   }
   @Get('/message')
   async getContactUs(@Response() res: any, @Request() req: any): Promise<any> {
+    console.log('sunim');
     return this.contactService.getContactUS(res, req);
   }
   @Post('/news-letter')

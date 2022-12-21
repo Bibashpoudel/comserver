@@ -41,6 +41,8 @@ export class AuthService {
     console.log(user);
     return {
       access_token: this.jwtService.sign({ user: user, sub: 1 }),
+      name: user.fullName,
+      role: user.role,
     };
   }
   async userName(username: any) {
