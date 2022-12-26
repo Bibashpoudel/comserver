@@ -26,7 +26,7 @@ import { User, userSchema } from './users.schema';
     PassportModule,
     JwtModule.register({
       secret: 'BibashPoudel',
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '24h' },
     }),
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],

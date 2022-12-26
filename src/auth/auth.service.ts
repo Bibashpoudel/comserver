@@ -49,7 +49,7 @@ export class AuthService {
     try {
       const user = await this.userModel.findOne({ email: username });
       if (user) {
-        return true;
+        return user;
       }
       return false;
     } catch (error) {}

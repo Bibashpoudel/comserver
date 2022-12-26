@@ -11,9 +11,31 @@ export class addJobs {
   @IsString()
   @IsNotEmpty()
   slug: string;
-
   isPreview: boolean;
-
   @IsNotEmpty()
   content: Blob;
+}
+
+export class updateJobs {
+  @IsNotEmpty()
+  isPreview: boolean;
+
+  content: Blob;
+}
+
+export class applyJob {
+  @IsString()
+  @IsNotEmpty()
+  fullName: string;
+  @IsString()
+  @IsNotEmpty()
+  email: string;
+  @IsString()
+  @IsNotEmpty()
+  position: string;
+  @IsNotEmpty()
+  phone: string;
+  @IsString()
+  @IsNotEmpty()
+  intro: string;
 }
