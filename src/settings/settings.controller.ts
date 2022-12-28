@@ -23,7 +23,7 @@ export class SettingController {
     return this.settingSerivce.addPrivacy(res, req, dto);
   }
 
-  @Post('/add-terms')
+  @Patch('/add-terms/:id')
   async addTerms(
     @Response() res: any,
     @Request() req: any,
@@ -34,5 +34,9 @@ export class SettingController {
   @Get('/privacy')
   async getPrivacy(@Response() res: any, @Request() req: any) {
     return this.settingSerivce.getPrivacy(res, req);
+  }
+  @Get('/terms')
+  async getterms(@Response() res: any, @Request() req: any) {
+    return this.settingSerivce.getTerms(res, req);
   }
 }
