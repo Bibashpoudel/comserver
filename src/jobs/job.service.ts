@@ -273,6 +273,11 @@ export class JobService {
       let size: any;
       let populate: any;
       let populate1: any;
+      const { selected } = req.query;
+
+      if (selected != '') {
+        searchq = { selected: selected };
+      }
       if (req.query.page && !isNaN(req.query.page) && req.query.page != 0) {
         page = Math.abs(req.query.page);
       } else {

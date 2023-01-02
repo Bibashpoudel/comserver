@@ -13,6 +13,8 @@ export class Contactus {
   phone?: string;
   @Prop()
   message: string;
+  @Prop({ default: false })
+  isReply: boolean;
 }
 
 export const contactusSchema = SchemaFactory.createForClass(Contactus);

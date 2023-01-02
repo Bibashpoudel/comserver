@@ -3,6 +3,12 @@ import { Document } from 'mongoose';
 
 export type applyJobDocument = applyJob & Document;
 
+enum activities {
+  Selected = 'selected',
+  Rejected = 'rejected',
+  Hold = 'hold',
+}
+
 @Schema()
 export class applyJob {
   @Prop()
@@ -17,6 +23,8 @@ export class applyJob {
   cv: string;
   @Prop()
   position: string;
+  @Prop()
+  selected: activities;
 
   @Prop({ default: false })
   isPreview: boolean;
