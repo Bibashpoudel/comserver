@@ -1,8 +1,14 @@
-import { codeDebug, contactUs, newsLetter, test } from './nodeMailer.helper';
+import {
+  codeDebug,
+  contactUs,
+  cvResponse,
+  newsLetter,
+  test,
+} from './nodeMailer.helper';
 
 import * as nodemailer from 'nodemailer';
 
-async function nodeMailer(requirements: any, forWhat: any) {
+async function nodeMailer(requirements: any, forWhat: any, type: any) {
   try {
     console.log(
       'client id',
@@ -10,17 +16,32 @@ async function nodeMailer(requirements: any, forWhat: any) {
       'private key',
       process.env.PRIVATE_KEY,
     );
-    const transporter = await nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 465,
-      secure: true,
-      auth: {
-        type: 'OAuth2',
-        user: process.env.EMAIL,
-        serviceClient: process.env.CLIENT_ID,
-        privateKey: process.env.PRIVATE_KEY,
-      },
-    });
+    let transporter;
+    if (type == 'hr') {
+      transporter = await nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
+        auth: {
+          type: 'OAuth2',
+          user: process.env.HR_EMAIL,
+          serviceClient: process.env.CLIENT_ID,
+          privateKey: process.env.PRIVATE_KEY,
+        },
+      });
+    } else {
+      transporter = await nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
+        auth: {
+          type: 'OAuth2',
+          user: process.env.EMAIL,
+          serviceClient: process.env.CLIENT_ID,
+          privateKey: process.env.PRIVATE_KEY,
+        },
+      });
+    }
 
     await transporter.verify();
     switch (forWhat) {
@@ -42,6 +63,8 @@ async function nodeMailer(requirements: any, forWhat: any) {
         return await newsLetter(requirements, transporter);
       case 'test':
         return await test(requirements, transporter);
+      case 'cvResponse':
+        return await cvResponse(requirements, transporter);
     }
   } catch (err) {
     console.log(err);

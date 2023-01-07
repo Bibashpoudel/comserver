@@ -31,6 +31,7 @@ export class ContactService {
       nodeMailer(
         { email: contactus.email, fullName: contactus.fullName },
         'contactUs',
+        'info',
       );
       return sendResponse(
         res,
@@ -119,7 +120,7 @@ export class ContactService {
           idTrue: true,
         });
         await newsLetter.save();
-        nodeMailer({ email: newsLetter.email }, 'newsLetter');
+        nodeMailer({ email: newsLetter.email }, 'newsLetter', 'info');
       }
       return sendResponse(
         res,

@@ -1,6 +1,7 @@
 import { HttpStatus, Injectable, Request, Response } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { nodeMailer } from 'src/global/nodeMailer';
 import {
   getQueryRequest,
   paginationHelper,
@@ -240,6 +241,11 @@ export class JobService {
       });
 
       await newApply.save();
+      nodeMailer(
+        { fullName: dto.fullName, position: dto.position, email: dto.email },
+        'cvResponse',
+        'hr',
+      );
 
       return sendResponse(
         res,
@@ -247,7 +253,7 @@ export class JobService {
         true,
         null,
         null,
-        `Your Resume has been submitted `,
+        `Your Resume has been submitted`,
         null,
       );
     } catch (error) {

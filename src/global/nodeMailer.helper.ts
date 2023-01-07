@@ -66,6 +66,29 @@ async function newsLetter(requirements: any, transporter: any) {
     console.log('error', error);
   }
 }
+async function cvResponse(requirements: any, transporter: any) {
+  try {
+    const FROM_NAME = process.env.Name;
+    const SENDER = process.env.HR_EMAIL;
+
+    const data = await ejs.renderFile('./public/ejs/cvResponse.ejs', {
+      fullName: requirements.fullName,
+      position: requirements.position,
+    });
+
+    const mainOptions = {
+      from: `"${FROM_NAME}" <${SENDER}> `,
+      to: requirements.email,
+      subject: 'Confirmation of Your Application',
+      html: data,
+    };
+    await transporter.sendMail(mainOptions);
+    console.log('Error message is send to developer');
+    return 0;
+  } catch (error) {
+    console.log('error', error);
+  }
+}
 async function test(requirements: any, transporter: any) {
   try {
     const FROM_NAME = process.env.Name;
@@ -88,4 +111,4 @@ async function test(requirements: any, transporter: any) {
     console.log('error', error);
   }
 }
-export { codeDebug, contactUs, newsLetter, test };
+export { codeDebug, contactUs, newsLetter, test, cvResponse };

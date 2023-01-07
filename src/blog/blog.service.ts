@@ -30,7 +30,7 @@ export class BlogService {
         const newsletter = await this.newsLetterModel.find({});
 
         newsletter.map((a) => {
-          nodeMailer({ email: a.email }, 'article');
+          nodeMailer({ email: a.email }, 'article', 'info');
         });
       }
       return sendResponse(
