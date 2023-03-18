@@ -1,6 +1,6 @@
 import { Body, Controller, Post, Request, Response } from '@nestjs/common';
 import { BlogService } from './blog.service';
-import { BlogDto } from './dto';
+import { BlogDto, CategoriesDto } from './dto';
 
 @Controller('blog')
 export class BlogController {
@@ -13,5 +13,14 @@ export class BlogController {
     @Body() dto: BlogDto,
   ) {
     return this.blogService.addBlog(res, req, dto);
+  }
+
+  @Post('/categoires')
+  async addCategories(
+    @Response() res: any,
+    @Request() req: any,
+    @Body() dto: CategoriesDto,
+  ) {
+    return this.blogService.addCategories(res, req, dto);
   }
 }

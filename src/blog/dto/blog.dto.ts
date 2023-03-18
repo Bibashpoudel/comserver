@@ -8,10 +8,20 @@ export class BlogDto {
   @IsNotEmpty()
   image: string;
 
-  addedBy?: string;
-
   @IsNotEmpty()
   content: BinaryData;
 
+  @IsNotEmpty()
+  categories: string;
+
+  @IsNotEmpty()
+  tag: Array<string>;
+
   isTrue?: boolean = false;
+}
+
+export class CategoriesDto {
+  @IsString()
+  @IsNotEmpty()
+  name: string;
 }

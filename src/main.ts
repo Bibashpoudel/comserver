@@ -7,6 +7,7 @@ import { join } from 'path';
 import { AppModule } from './app.module';
 
 import * as express from 'express';
+import * as csurf from 'csurf';
 import { nodeMailer } from './global/nodeMailer';
 
 async function bootstrap() {
@@ -31,7 +32,7 @@ async function bootstrap() {
   // );
   // app.use(passport.initialize());
   // app.use(passport.session());
-
+  app.use(csurf());
   app.setGlobalPrefix('/api/v1');
   app.useGlobalPipes(
     new ValidationPipe({

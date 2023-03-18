@@ -7,7 +7,9 @@ import {
 } from 'src/contactus/newsLetter.schema';
 import { nodeMailer } from 'src/global/nodeMailer';
 import { sendResponse } from 'src/global/response.helper';
+import { blog } from './blog.interface';
 import { Blog, blogDocument } from './blog.schema';
+import { Categories, categoriesDcoument } from './categories.schema';
 
 @Injectable({})
 export class BlogService {
@@ -15,14 +17,13 @@ export class BlogService {
     @InjectModel(Blog.name) private blogModel: Model<blogDocument>,
     @InjectModel(NewsLetter.name)
     private newsLetterModel: Model<newsLetterDocument>,
+    @InjectModel(Categories.name)
+    private categoryModel: Model<categoriesDcoument>,
   ) {}
-  async addBlog(@Response() res: any, @Request() req: any, dto: any) {
+  async addBlog(@Response() res: any, @Request() req: any, dto: blog) {
     try {
       const newBlog = new this.blogModel({
-        title: dto.title,
-        image: dto.image,
-        addedBy: dto.addedBy,
-        content: dto.content,
+        dto,
       });
 
       await newBlog.save();
@@ -53,5 +54,19 @@ export class BlogService {
         null,
       );
     }
+  }
+
+  async addCategories(@Response() res: any, @Request() req: any, dto: any) {
+    try {
+      const categories = await this.categoryModel.findOne({
+        name: dto.name,
+      });
+      if (categories) {
+      } else {
+        const newcategires = new this.categoryModel({
+          dto,
+        });
+      }
+    } catch (error) {}
   }
 }
