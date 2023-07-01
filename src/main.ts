@@ -20,6 +20,7 @@ async function bootstrap() {
       whitelist: true,
     }),
   );
+  //abc
 
   app.use(express.static(join(__dirname, '../public')));
   //app.useStaticAssets(join(__dirname, '..', 'public'));
