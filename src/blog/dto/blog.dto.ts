@@ -1,3 +1,4 @@
+import { Blob } from 'buffer';
 import { IsNotEmpty, IsString } from 'class-validator';
 
 export class BlogDto {
@@ -6,10 +7,7 @@ export class BlogDto {
   title: string;
   @IsString()
   @IsNotEmpty()
-  image: string;
-
-  @IsNotEmpty()
-  content: BinaryData;
+  content: Blob;
 
   @IsNotEmpty()
   categories: string;

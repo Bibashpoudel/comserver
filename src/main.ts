@@ -1,38 +1,19 @@
 import { ValidationPipe } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
+import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { useContainer } from 'class-validator';
 import { join } from 'path';
 import { AppModule } from './app.module';
-
 import * as express from 'express';
-import * as csurf from 'csurf';
-import { nodeMailer } from './global/nodeMailer';
+import * as Sentry from '@sentry/node';
+import { SentryFilter } from './global/sentryFIlter';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     cors: true,
   });
 
-  // app.enableCors({
-  //  origin: '*',
-  //  });
-  console.log('called');
-  //nodeMailer({ email: 'pdlbibash77@gmail.com', fullName: 'Bibash' }, 'test');
-
-  // app.set('trust proxy', 1); // trust first proxy
-  // app.use(
-  //   session({
-  //     secret: process.env.SESSION_KEY,
-  //     resave: false,
-  //     saveUninitialized: true,
-  //     cookie: { maxAge: 3600000 },
-  //   }),
-  // );
-  // app.use(passport.initialize());
-  // app.use(passport.session());
-  app.use(csurf());
   app.setGlobalPrefix('/api/v1');
   app.useGlobalPipes(
     new ValidationPipe({
@@ -46,6 +27,8 @@ async function bootstrap() {
 
   app.setViewEngine('ejs');
 
+  //app.use(csurf());
+
   const swaggerConfig = new DocumentBuilder()
     .setTitle(' company ')
     .setDescription(
@@ -57,6 +40,18 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('swagger', app, document);
+
+  Sentry.init({
+    dsn: process.env.SENTRY_DNS,
+  });
+
+  Sentry.init({
+    dsn: process.env.SENTRY_DNS,
+  });
+
+  // Import the filter globally, capturing all exceptions on all routes
+  const { httpAdapter } = app.get(HttpAdapterHost);
+  app.useGlobalFilters(new SentryFilter(httpAdapter));
 
   const PORT = process.env.PORT || 5001;
   useContainer(app.select(AppModule), { fallbackOnErrors: true });

@@ -7,7 +7,7 @@ import {
   Type,
 } from '@nestjs/common';
 
-const RoleGuard = (role: any): Type<CanActivate> => {
+const RoleGuard = (role: string): Type<CanActivate> => {
   class RoleGuardMixin implements CanActivate {
     canActivate(context: ExecutionContext) {
       const request = context.switchToHttp().getRequest<any>();

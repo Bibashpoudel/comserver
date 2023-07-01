@@ -10,38 +10,15 @@ import * as nodemailer from 'nodemailer';
 
 async function nodeMailer(requirements: any, forWhat: any, type: any) {
   try {
-    console.log(
-      'client id',
-      process.env.CLIENT_ID,
-      'private key',
-      process.env.PRIVATE_KEY,
-    );
-    let transporter;
-    if (type == 'hr') {
-      transporter = await nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true,
-        auth: {
-          type: 'OAuth2',
-          user: process.env.HR_EMAIL,
-          serviceClient: process.env.CLIENT_ID,
-          privateKey: process.env.PRIVATE_KEY,
-        },
-      });
-    } else {
-      transporter = await nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true,
-        auth: {
-          type: 'OAuth2',
-          user: process.env.EMAIL,
-          serviceClient: process.env.CLIENT_ID,
-          privateKey: process.env.PRIVATE_KEY,
-        },
-      });
-    }
+    console.log(process.env.HOST, process.env.USER, process.env.EMAIL);
+    const transporter = await nodemailer.createTransport({
+      host: process.env.HOST,
+      port: 587,
+      auth: {
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD,
+      },
+    });
 
     await transporter.verify();
     switch (forWhat) {

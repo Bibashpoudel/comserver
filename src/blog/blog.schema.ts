@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Blob } from 'buffer';
 import { Type } from 'class-transformer';
 import { Document } from 'mongoose';
 import { User, userSchema } from 'src/auth/users.schema';
@@ -16,16 +17,20 @@ export class Blog {
   @Type(() => User)
   addedBy: User;
   @Prop()
-  content: BinaryData;
+  content: Blob;
 
   @Prop()
   tag: Array<string>;
 
   @Prop({ type: categoriesSchema })
   @Type(() => Categories)
-  categorie: Categories;
+  categories: Categories;
 
+  @Prop()
   isTrue?: boolean = false;
+
+  @Prop()
+  isDeleted?: boolean = false;
 }
 
 export const blogSchema = SchemaFactory.createForClass(Blog);

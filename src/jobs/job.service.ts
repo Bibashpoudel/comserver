@@ -54,7 +54,7 @@ export class JobService {
   async getJobs(@Response() res: any, @Request() req: any) {
     try {
       const defaultSize: any = 10;
-      let searchq: any;
+      const searchq = { isPreview: true };
       let selectq: any;
       let sortq: any;
       let page: any;
@@ -71,9 +71,7 @@ export class JobService {
       } else {
         size = defaultSize;
       }
-      searchq = {
-        isPreview: true,
-      };
+
       const datas = await getQueryRequest(
         this.jobModel,
         searchq,

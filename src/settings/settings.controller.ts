@@ -6,7 +6,9 @@ import {
   Post,
   Request,
   Response,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { addPrivacy, addTerms } from './dto';
 import { SettingService } from './settings.service';
 
@@ -14,6 +16,7 @@ import { SettingService } from './settings.service';
 export class SettingController {
   constructor(private settingSerivce: SettingService) {}
 
+  @UseGuards(AuthGuard('jwt'))
   @Patch('/add-privacy/:id')
   async adPrivacy(
     @Response() res: any,
@@ -23,6 +26,7 @@ export class SettingController {
     return this.settingSerivce.addPrivacy(res, req, dto);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Patch('/add-terms/:id')
   async addTerms(
     @Response() res: any,

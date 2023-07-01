@@ -40,6 +40,7 @@ export class JobController {
   async getJobs(@Response() res: any, @Request() req: any): Promise<any> {
     return this.jobService.getJobs(res, req);
   }
+  @UseGuards(AuthGuard('jwt'))
   @Get('/admin/get-jobs')
   async getadminJobs(@Response() res: any, @Request() req: any): Promise<any> {
     return this.jobService.getadminJobs(res, req);
