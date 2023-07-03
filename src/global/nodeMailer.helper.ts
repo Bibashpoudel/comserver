@@ -69,7 +69,7 @@ async function newsLetter(requirements: any, transporter: any) {
 async function cvResponse(requirements: any, transporter: any) {
   try {
     const FROM_NAME = process.env.Name;
-    const SENDER = process.env.HR_EMAIL;
+    const SENDER = process.env.EMAIL;
 
     const data = await ejs.renderFile('./public/ejs/cvResponse.ejs', {
       fullName: requirements.fullName,
