@@ -158,11 +158,63 @@ export class JobService {
     }
   }
 
+  async deteteJob(@Response() res: any, @Request() req: any, id: any) {
+    try {
+      console.log({ id });
+      await this.jobModel.findOneAndDelete({ _id: id });
+      return sendResponse(
+        res,
+        HttpStatus.OK,
+        true,
+        null,
+        null,
+        'Job has been deleted',
+        null,
+      );
+    } catch (error) {
+      return sendResponse(
+        res,
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        false,
+        null,
+        'Internal server error',
+        'Internal server error',
+        null,
+      );
+    }
+  }
+  async getAdminJobDetails(@Response() res: any, @Request() req: any, id: any) {
+    try {
+      const job = await this.jobModel.findOne({ _id: id });
+      console.log(job);
+      if (job) {
+        return sendResponse(
+          res,
+          HttpStatus.OK,
+          true,
+          job,
+          null,
+          'Data Obtain successfully',
+          null,
+        );
+      }
+    } catch (error) {
+      return sendResponse(
+        res,
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        false,
+        null,
+        'Internal server error',
+        'Internal server error',
+        null,
+      );
+    }
+  }
+
   async getJob(@Response() res: any, @Request() req: any) {
     try {
       const slug = req.params.slug;
       const job = await this.jobModel.findOne({ slug: slug });
-      console.log(job);
       if (job) {
         return sendResponse(
           res,
@@ -190,11 +242,15 @@ export class JobService {
   async updateJobs(@Response() res: any, @Request() req: any, dto: any) {
     try {
       const id = req.params.id;
-      console.log(dto);
+      console.log({ dto });
       const job = await this.jobModel.findOne({ _id: id });
       if (job) {
         job.content = dto.content ? dto.content : job?.content;
         job.isPreview = dto.isPreview;
+        job.title = dto.title ? dto.title : job?.title;
+        job.slug = dto.slug ? dto.slug : job?.slug;
+        job.stack = dto.stack ? dto.stack : job?.stack;
+
         job.updatedAt = new Date();
         await job.save();
         return sendResponse(

@@ -2,11 +2,14 @@ import {
   Bind,
   Body,
   Controller,
+  Delete,
   Get,
   HttpStatus,
+  Param,
   ParseFilePipeBuilder,
   Post,
   Put,
+  Query,
   Request,
   Response,
   UploadedFile,
@@ -46,6 +49,25 @@ export class JobController {
     return this.jobService.getadminJobs(res, req);
   }
 
+  @UseGuards(AuthGuard('jwt'))
+  @Delete('/admin/delete/:id')
+  async deteteJob(
+    @Response() res: any,
+    @Request() req: any,
+    @Param('id') id: any,
+  ): Promise<any> {
+    return this.jobService.deteteJob(res, req, id);
+  }
+
+  @Get('admin/get-job/:id')
+  async getAdminJobDetails(
+    @Response() res: any,
+    @Request() req: any,
+    @Query('id') id: any,
+  ): Promise<any> {
+    return this.jobService.getAdminJobDetails(res, req, id);
+  }
+
   @Get('/get-job/:slug')
   async getJob(@Response() res: any, @Request() req: any): Promise<any> {
     return this.jobService.getJob(res, req);
@@ -62,6 +84,7 @@ export class JobController {
     return this.jobService.updateJobs(res, req, dto);
   }
 
+  // for client sode
   @Post('apply/jobs')
   @UseInterceptors(
     FilesInterceptor('file', 20, {

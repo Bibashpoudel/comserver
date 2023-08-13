@@ -1,5 +1,5 @@
 import { Blob } from 'buffer';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class addJobs {
   @IsString()
@@ -17,10 +17,16 @@ export class addJobs {
 }
 
 export class updateJobs {
-  @IsNotEmpty()
-  isPreview: boolean;
-
-  content: Blob;
+  @IsOptional()
+  title?: string;
+  @IsOptional()
+  stack?: string;
+  @IsOptional()
+  slug?: string;
+  @IsOptional()
+  isPreview?: boolean;
+  @IsOptional()
+  content?: Blob;
 }
 
 export class applyJob {

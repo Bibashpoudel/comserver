@@ -18,7 +18,7 @@ export class Job {
   createdAt: Date;
   @Prop()
   updatedAt: Date;
-  @Prop()
+  @Prop({ default: false })
   isPreview: boolean;
 }
 
