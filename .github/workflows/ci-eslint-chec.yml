@@ -31,7 +31,7 @@ jobs: # list of things to do
         uses: actions/checkout@v2
 
       - name: Install Dependencies
-        run: yarn ci
+        run: npm ci
 
       - name: Code Linting
         run: yarn run lint
