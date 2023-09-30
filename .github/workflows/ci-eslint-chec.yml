@@ -3,6 +3,11 @@
 name: Lint # name of the action (displayed in the github interface)
 
 on:
+  workflow_call:
+    inputs:
+      project:
+        required: true
+        type: string
   push:
     branches:
       - main
@@ -33,7 +38,7 @@ jobs: # list of things to do
         with:
           cmd: install
 
-      - name: Install Node.js dependencies
+      - name: Install Node.js dependencies `${{ inputs.project }}`
         run: yarn ci
         working-directory: .
 
