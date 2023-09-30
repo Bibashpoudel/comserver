@@ -31,6 +31,8 @@ jobs: # list of things to do
         uses: borales/actions-yarn@v4
         with:
           cmd: install
+      - name: Install Node.js dependencies
+      run: npm ci
 
       - name: Code Checkout
         uses: actions/checkout@v3
