@@ -35,6 +35,7 @@ jobs: # list of things to do
 
       - name: Install Node.js dependencies
         run: yarn ci
+        working-directory: backend/package-lock.json
 
       - name: Code Checkout
         uses: actions/checkout@v3
