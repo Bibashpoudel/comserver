@@ -189,6 +189,7 @@ export class BlogService {
       const categories = await this.categoryModel.findOne({
         name: dto.name.toUpperCase(),
       });
+      console.log({ categories }, req.user.user.id);
       if (categories) {
         return sendResponse(
           res,
@@ -202,6 +203,7 @@ export class BlogService {
       } else {
         const newcategory = new this.categoryModel({
           name: dto.name.toUpperCase(),
+          addedBy: req.user.user.id,
         });
         await newcategory.save();
         if (newcategory) {
