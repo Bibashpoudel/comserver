@@ -1,48 +1,23 @@
-# .github/workflows/lint.yml
+# This workflow checks eslint in all projects using a reusable workflow.
 
-name: Lint # name of the action (displayed in the github interface)
+name: Check Integration
 
 on:
-  workflow_call:
-    inputs:
-      project:
-        required: true
-        type: string
   push:
-    branches:
-      - main
-      - release/*
-      - instance/*
+    branches: [main]
   pull_request:
-    branches:
-      - main
-      - release/*
-      - instance/*
+    branches: [main]
 
-env: # environment variables (available in any part of the action)
-  NODE_VERSION: 16
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-jobs: # list of things to do
-  linting:
-    name: Linting # job name (unique id)
-    runs-on: ubuntu-latest # on which machine to run
-    steps: # list of steps
-      - name: Install NodeJS
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ env.NODE_VERSION }}
-
-      # install yarn
-      - name: Run install
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: install
-
-      - name: Install Node.js dependencies `${{ inputs.project }}`
-        run: yarn ci
-
-      - name: Code Checkout
-        uses: actions/checkout@v3
-
-      - name: Code Linting
-        run: yarn run lint
+          node-version: '16.x'
+      - run: npm run ci
+      - run: npm run build
+      - run: npm run lint
