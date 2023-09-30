@@ -3,12 +3,6 @@
 name: Lint # name of the action (displayed in the github interface)
 
 on:
-  workflow_call:
-    inputs:
-      project:
-        required: true
-        type: string
-
   push:
     branches:
       - main
