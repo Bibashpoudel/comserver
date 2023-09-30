@@ -17,9 +17,9 @@ jobs:
       - name: Deploy backeend
         uses: appleboy/ssh-action@v0.1.2
         with:
-          host: ${{secret.HOST}}
-          key: ${{secret.KEY}}
-          username: ${{secret.USERNAME}}
+          host: ${{secrets.HOST}}
+          key: ${{secrets.KEY}}
+          username: ${{secrets.USERNAME}}
 
           script: |
             cd company/comserver
