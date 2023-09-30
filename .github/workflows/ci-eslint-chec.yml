@@ -45,7 +45,7 @@ jobs: # list of things to do
         uses: actions/checkout@v3
 
       - name: Code Linting
-        run: yarn lint
+        run: yarn run lint
 
       - name: Fail if eslint made any changes
         run: |
