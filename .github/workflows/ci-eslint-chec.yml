@@ -40,7 +40,6 @@ jobs: # list of things to do
 
       - name: Install Node.js dependencies `${{ inputs.project }}`
         run: yarn ci
-        working-directory: .
 
       - name: Code Checkout
         uses: actions/checkout@v3
