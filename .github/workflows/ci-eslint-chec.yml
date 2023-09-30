@@ -26,11 +26,13 @@ jobs: # list of things to do
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
+    
       # install yarn
       - name: Run install
         uses: borales/actions-yarn@v4
         with:
           cmd: install
+
       - name: Install Node.js dependencies
       run: npm ci
 
