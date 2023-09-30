@@ -27,6 +27,7 @@ jobs: # list of things to do
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'yarn'
+          cache-dependency-path: yarn.lock
 
       - name: Code Checkout
         uses: actions/checkout@v2
