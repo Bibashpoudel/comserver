@@ -8,6 +8,7 @@ branches:
   - development
   - staging
   - production
+  - main
 
 env: # environment variables (available in any part of the action)
   NODE_VERSION: 16
