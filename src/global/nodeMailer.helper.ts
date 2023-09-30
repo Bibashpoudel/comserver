@@ -111,4 +111,6 @@ async function test(requirements: any, transporter: any) {
     console.log('error', error);
   }
 }
-export { codeDebug, contactUs, newsLetter, test, cvResponse };
+export {
+  codeDebug, contactUs, newsLetter, test, cvResponse,
+};

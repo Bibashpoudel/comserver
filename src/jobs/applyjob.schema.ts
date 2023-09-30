@@ -12,24 +12,31 @@ enum activities {
 @Schema()
 export class applyJob {
   @Prop()
-  fullName: string;
+    fullName: string;
+
   @Prop()
-  email: string;
+    email: string;
+
   @Prop()
-  phone: string;
+    phone: string;
+
   @Prop()
-  intro: string;
+    intro: string;
+
   @Prop()
-  cv: string;
+    cv: string;
+
   @Prop()
-  position: string;
+    position: string;
+
   @Prop()
-  selected: activities;
+    selected: activities;
 
   @Prop({ default: false })
-  isPreview: boolean;
+    isPreview: boolean;
+
   @Prop({ default: new Date() })
-  createdAt: Date;
+    createdAt: Date;
 }
 
 export const applyJobSchema = SchemaFactory.createForClass(applyJob);

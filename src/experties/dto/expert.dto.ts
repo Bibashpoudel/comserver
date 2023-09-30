@@ -3,8 +3,8 @@ import { IsNotEmpty, IsString } from 'class-validator';
 export class addExpertDto {
   @IsString()
   @IsNotEmpty()
-  title: string;
+    title: string;
 
   @IsNotEmpty()
-  items?: Array<string>;
+    items?: Array<string>;
 }

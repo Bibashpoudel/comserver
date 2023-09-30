@@ -7,7 +7,7 @@ export type termsDocument = Terms & Document;
 @Schema()
 export class Terms {
   @Prop()
-  termsData: Blob;
+    termsData: Blob;
 }
 
 export const termsSchema = SchemaFactory.createForClass(Terms);

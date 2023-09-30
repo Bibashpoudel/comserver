@@ -23,6 +23,7 @@ export class ContactController {
   ): Promise<any> {
     return this.contactService.addContactUs(res, req, dto);
   }
+
   @UseGuards(AuthGuard('jwt'))
   @Get('/message')
   async getContactUs(@Response() res: any, @Request() req: any): Promise<any> {
@@ -37,6 +38,7 @@ export class ContactController {
   ): Promise<any> {
     return this.contactService.addNewsLetter(res, req, dto);
   }
+
   @UseGuards(AuthGuard('jwt'))
   @Get('/news-letter/users')
   async getNewsLetter(@Response() res: any, @Request() req: any): Promise<any> {

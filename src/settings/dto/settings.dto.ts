@@ -3,10 +3,10 @@ import { IsNotEmpty } from 'class-validator';
 
 export class addPrivacy {
   @IsNotEmpty()
-  privacyData: Blob;
+    privacyData: Blob;
 }
 
 export class addTerms {
   @IsNotEmpty()
-  termsData: Blob;
+    termsData: Blob;
 }

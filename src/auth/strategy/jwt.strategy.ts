@@ -15,6 +15,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       secretOrKey: 'BibashPoudel',
     });
   }
+
   async validate(payload: any): Promise<any> {
     console.log(payload.user.email);
     const user = await this.userModel.findOne({ email: payload.user.email });

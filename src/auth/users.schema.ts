@@ -4,23 +4,23 @@ import { Document } from 'mongoose';
 export type userDocument = User & Document;
 
 enum Role {
-  User = 'user', //or User = "user",
+  User = 'user', // or User = "user",
   Admin = 'admin', // or Admin = "admin",
 }
 
 @Schema()
 export class User {
   @Prop()
-  fullName: string;
+    fullName: string;
 
   @Prop({ required: true, unique: true })
-  email: string;
+    email: string;
 
   @Prop()
-  password: string;
+    password: string;
 
   @Prop()
-  role: Role;
+    role: Role;
 }
 
 export const userSchema = SchemaFactory.createForClass(User);

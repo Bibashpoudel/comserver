@@ -26,10 +26,12 @@ export class BlogController {
   ) {
     return this.blogService.addBlog(res, req, dto);
   }
+
   @Get('/get-blog')
   async getBlog(@Response() res: any, @Request() req: any) {
     return this.blogService.getBlog(res, req);
   }
+
   @UseGuards(AuthGuard('jwt'))
   @Put('/update-blog')
   async updateBlog(
@@ -39,6 +41,7 @@ export class BlogController {
   ) {
     return this.blogService.updateBlog(res, req, dto);
   }
+
   @UseGuards(AuthGuard('jwt'))
   @Delete('/delete-blog')
   async deleteBlog(@Response() res: any, @Request() req: any) {
@@ -55,10 +58,12 @@ export class BlogController {
   ) {
     return this.blogService.addCategory(res, req, dto);
   }
+
   @Get('/get-categories')
   async getCategories(@Response() res: any, @Request() req: any) {
     return this.blogService.getCategories(res, req);
   }
+
   @UseGuards(AuthGuard('jwt'))
   @Put('/update-category')
   async updateCategories(

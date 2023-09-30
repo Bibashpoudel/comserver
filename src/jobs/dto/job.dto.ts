@@ -4,44 +4,55 @@ import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 export class addJobs {
   @IsString()
   @IsNotEmpty()
-  title: string;
+    title: string;
+
   @IsString()
   @IsNotEmpty()
-  stack: string;
+    stack: string;
+
   @IsString()
   @IsNotEmpty()
-  slug: string;
+    slug: string;
+
   isPreview: boolean;
   @IsNotEmpty()
-  content: Blob;
+    content: Blob;
 }
 
 export class updateJobs {
   @IsOptional()
-  title?: string;
+    title?: string;
+
   @IsOptional()
-  stack?: string;
+    stack?: string;
+
   @IsOptional()
-  slug?: string;
+    slug?: string;
+
   @IsOptional()
-  isPreview?: boolean;
+    isPreview?: boolean;
+
   @IsOptional()
-  content?: Blob;
+    content?: Blob;
 }
 
 export class applyJob {
   @IsString()
   @IsNotEmpty()
-  fullName: string;
+    fullName: string;
+
   @IsString()
   @IsNotEmpty()
-  email: string;
+    email: string;
+
   @IsString()
   @IsNotEmpty()
-  position: string;
+    position: string;
+
   @IsNotEmpty()
-  phone: string;
+    phone: string;
+
   @IsString()
   @IsNotEmpty()
-  intro: string;
+    intro: string;
 }

@@ -10,27 +10,30 @@ export type blogDocument = Blog & Document;
 @Schema()
 export class Blog {
   @Prop()
-  title: string;
-  @Prop()
-  image: string;
-  @Prop({ type: userSchema })
-  @Type(() => User)
-  addedBy: User;
-  @Prop()
-  content: Blob;
+    title: string;
 
   @Prop()
-  tag: Array<string>;
+    image: string;
+
+  @Prop({ type: userSchema })
+  @Type(() => User)
+    addedBy: User;
+
+  @Prop()
+    content: Blob;
+
+  @Prop()
+    tag: Array<string>;
 
   @Prop({ type: categoriesSchema })
   @Type(() => Categories)
-  categories: Categories;
+    categories: Categories;
 
   @Prop()
-  isTrue?: boolean = false;
+    isTrue?: boolean = false;
 
   @Prop()
-  isDeleted?: boolean = false;
+    isDeleted?: boolean = false;
 }
 
 export const blogSchema = SchemaFactory.createForClass(Blog);

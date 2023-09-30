@@ -1,4 +1,6 @@
-import { HttpStatus, Injectable, Request, Response } from '@nestjs/common';
+import {
+  HttpStatus, Injectable, Request, Response,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import {
@@ -24,6 +26,7 @@ export class BlogService {
     @InjectModel(Categories.name)
     private categoryModel: Model<categoriesDcoument>,
   ) {}
+
   async addBlog(@Response() res: any, @Request() req: any, dto: any) {
     try {
       const newBlog = new this.blogModel({
@@ -34,7 +37,7 @@ export class BlogService {
       if (dto.isTrue) {
         const newsletter = await this.newsLetterModel.find({});
 
-        newsletter.map((a) => {
+        newsletter.map(a => {
           nodeMailer({ email: a.email }, 'article', 'info');
         });
       }
@@ -125,6 +128,7 @@ export class BlogService {
       );
     }
   }
+
   async updateBlog(@Response() res: any, @Request() req: any, dto: any) {
     try {
       await this.blogModel.update({
@@ -183,7 +187,7 @@ export class BlogService {
     }
   }
 
-  //categories
+  // categories
   async addCategory(@Response() res: any, @Request() req: any, dto: any) {
     try {
       const categories = await this.categoryModel.findOne({
@@ -200,23 +204,22 @@ export class BlogService {
           `${dto.name} already exist`,
           null,
         );
-      } else {
-        const newcategory = new this.categoryModel({
-          name: dto.name.toUpperCase(),
-          addedBy: req.user.user.id,
-        });
-        await newcategory.save();
-        if (newcategory) {
-          return sendResponse(
-            res,
-            HttpStatus.CREATED,
-            true,
-            null,
-            null,
-            'category added successfully',
-            null,
-          );
-        }
+      }
+      const newcategory = new this.categoryModel({
+        name: dto.name.toUpperCase(),
+        addedBy: req.user.user.id,
+      });
+      await newcategory.save();
+      if (newcategory) {
+        return sendResponse(
+          res,
+          HttpStatus.CREATED,
+          true,
+          null,
+          null,
+          'category added successfully',
+          null,
+        );
       }
     } catch (error) {
       console.log(error);
@@ -307,17 +310,16 @@ export class BlogService {
           'Categories has been Updated',
           null,
         );
-      } else {
-        return sendResponse(
-          res,
-          HttpStatus.FOUND,
-          false,
-          null,
-          'categories already exist',
-          'categories already exist',
-          null,
-        );
       }
+      return sendResponse(
+        res,
+        HttpStatus.FOUND,
+        false,
+        null,
+        'categories already exist',
+        'categories already exist',
+        null,
+      );
     } catch (error) {
       return sendResponse(
         res,
