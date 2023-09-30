@@ -34,7 +34,7 @@ jobs: # list of things to do
           cmd: install
 
       - name: Install Node.js dependencies
-      run: npm ci
+        run: npm ci
 
       - name: Code Checkout
         uses: actions/checkout@v3
