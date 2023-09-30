@@ -17,16 +17,16 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-      - name: Deploy
+    steps:
+      - name: Deploy backeend
         uses: appleboy/ssh-action@v0.1.2
         with:
           host: ${{secret.HOST}}
           key: ${{secret.KEY}}
           username: ${{secret.USERNAME}}
-        
+
           script: |
             cd company/comserver
             git pull https://github.com/Bibashpoudel/comserver.git
             yarn build
-            pm2 reload 
-            
+            pm2 reload
