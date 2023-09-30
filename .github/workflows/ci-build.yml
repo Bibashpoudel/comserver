@@ -1,6 +1,6 @@
 # This workflow checks eslint in all projects using a reusable workflow.
 
-name: Check eslint
+name: Build
 
 on:
   push:
