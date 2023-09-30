@@ -3,6 +3,11 @@
 name: Lint # name of the action (displayed in the github interface)
 
 on:
+  workflow_call:
+    inputs:
+      project:
+        required: true
+        type: string
   push:
     branches:
       - main
@@ -15,7 +20,7 @@ on:
       - instance/*
 
 env: # environment variables (available in any part of the action)
-  NODE_VERSION: 16
+  NODE_VERSION: 20.5.1
 
 jobs: # list of things to do
   linting:
@@ -26,18 +31,23 @@ jobs: # list of things to do
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
-    
+
       # install yarn
       - name: Run install
         uses: borales/actions-yarn@v4
         with:
           cmd: install
 
-      - name: Install Node.js dependencies
-      run: npm ci
-
       - name: Code Checkout
         uses: actions/checkout@v3
 
+      - name: Install Node.js dependencies `${{ inputs.project }}`
+        run: yarn
+
       - name: Code Linting
-        run: yarn run lint
+        run: yarn lint
+
+      - name: Fail if eslint made any changes
+        run: |
+          git --no-pager diff
+          [[ -z $(git status --untracked-files=no --porcelain) ]] && echo "running eslint made no changes"

@@ -1,14 +1,15 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { Document } from 'mongoose';
+import { Document } from 'mongoose';
 
 export type newsLetterDocument = NewsLetter & Document;
 
 @Schema()
 export class NewsLetter {
   @Prop()
-  email: string;
+    email: string;
+
   @Prop()
-  isTure: boolean;
+    isTure: boolean;
 }
 
 export const newsLetterSchema = SchemaFactory.createForClass(NewsLetter);

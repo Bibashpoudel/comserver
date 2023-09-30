@@ -3,7 +3,6 @@ import {
   Controller,
   Get,
   Patch,
-  Post,
   Request,
   Response,
   UseGuards,
@@ -35,10 +34,12 @@ export class SettingController {
   ) {
     return this.settingSerivce.addTerms(res, req, dto);
   }
+
   @Get('/privacy')
   async getPrivacy(@Response() res: any, @Request() req: any) {
     return this.settingSerivce.getPrivacy(res, req);
   }
+
   @Get('/terms')
   async getterms(@Response() res: any, @Request() req: any) {
     return this.settingSerivce.getTerms(res, req);

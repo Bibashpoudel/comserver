@@ -11,7 +11,7 @@ const RoleGuard = (role: string): Type<CanActivate> => {
   class RoleGuardMixin implements CanActivate {
     canActivate(context: ExecutionContext) {
       const request = context.switchToHttp().getRequest<any>();
-      const user = request.user;
+      const { user } = request;
       console.log('user:', user);
       const abc = user?.user.role.includes(role);
       console.log(abc);

@@ -20,15 +20,15 @@ async function bootstrap() {
       whitelist: true,
     }),
   );
-  //abc
+  // abc
 
   app.use(express.static(join(__dirname, '../public')));
-  //app.useStaticAssets(join(__dirname, '..', 'public'));
+  // app.useStaticAssets(join(__dirname, '..', 'public'));
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
 
   app.setViewEngine('ejs');
 
-  //app.use(csurf());
+  // app.use(csurf());
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle(' company ')

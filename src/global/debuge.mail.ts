@@ -2,7 +2,7 @@ import { nodeMailer } from './nodeMailer';
 
 export function errorMessage(message: any) {
   nodeMailer(
-    { functionName: 'addProviences', message: message },
+    { functionName: 'addProviences', message },
     'debug',
     'info',
   );

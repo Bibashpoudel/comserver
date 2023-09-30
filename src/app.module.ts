@@ -9,6 +9,7 @@ import { SettingModule } from './settings/settings.module';
 import { AuthModule } from './auth/auth.module';
 import { JobModule } from './jobs/job.module';
 import { BlogModule } from './blog/blog.module';
+
 @Module({
   imports: [
     BlogModule,

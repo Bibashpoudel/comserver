@@ -6,9 +6,10 @@ export type expertDocument = Expert & Document;
 @Schema()
 export class Expert {
   @Prop()
-  title: string;
+    title: string;
+
   @Prop()
-  items?: [{ name: string }];
+    items?: [{ name: string }];
 }
 
 export const expertSchema = SchemaFactory.createForClass(Expert);

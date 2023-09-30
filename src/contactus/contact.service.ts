@@ -1,4 +1,6 @@
-import { HttpStatus, Injectable, Request, Response } from '@nestjs/common';
+import {
+  HttpStatus, Injectable, Request, Response,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { nodeMailer } from 'src/global/nodeMailer';
@@ -109,6 +111,7 @@ export class ContactService {
       );
     }
   }
+
   async addNewsLetter(@Response() res: any, @Request() req: any, dto: any) {
     try {
       const oldNewsLetter = await this.newsLetterModel.findOne({
@@ -143,6 +146,7 @@ export class ContactService {
       );
     }
   }
+
   async getNewsLetter(@Response() res: any, @Request() req: any) {
     try {
       const defaultSize: any = 10;

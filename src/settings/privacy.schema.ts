@@ -7,7 +7,7 @@ export type privacyDocument = Privacy & Document;
 @Schema()
 export class Privacy {
   @Prop()
-  privacyData: Blob;
+    privacyData: Blob;
 }
 
 export const privacySchema = SchemaFactory.createForClass(Privacy);

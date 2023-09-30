@@ -1,6 +1,5 @@
 import {
   HttpStatus,
-  Inject,
   Injectable,
   Request,
   Response,
@@ -151,6 +150,7 @@ export class SettingService {
       );
     }
   }
+
   async getTerms(@Response() res: any, @Request() req: any) {
     try {
       const defaultSize: any = 10;

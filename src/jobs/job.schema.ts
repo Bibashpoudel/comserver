@@ -7,19 +7,25 @@ export type jobDocument = Job & Document;
 @Schema()
 export class Job {
   @Prop()
-  title: string;
+    title: string;
+
   @Prop()
-  stack: string;
+    stack: string;
+
   @Prop()
-  slug: string;
+    slug: string;
+
   @Prop()
-  content: Blob;
+    content: Blob;
+
   @Prop()
-  createdAt: Date;
+    createdAt: Date;
+
   @Prop()
-  updatedAt: Date;
+    updatedAt: Date;
+
   @Prop({ default: false })
-  isPreview: boolean;
+    isPreview: boolean;
 }
 
 export const jobSchems = SchemaFactory.createForClass(Job);

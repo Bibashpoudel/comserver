@@ -1,12 +1,9 @@
 import {
-  Bind,
   Body,
   Controller,
   Delete,
   Get,
-  HttpStatus,
   Param,
-  ParseFilePipeBuilder,
   Post,
   Put,
   Query,
@@ -17,12 +14,11 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { FilesInterceptor } from '@nestjs/platform-express';
 
 import { addJobs, applyJob, updateJobs } from './dto';
 import { JobService } from './job.service';
 import { diskStorage } from 'multer';
-import path from 'path';
 
 @Controller('jobs')
 export class JobController {
@@ -43,6 +39,7 @@ export class JobController {
   async getJobs(@Response() res: any, @Request() req: any): Promise<any> {
     return this.jobService.getJobs(res, req);
   }
+
   @UseGuards(AuthGuard('jwt'))
   @Get('/admin/get-jobs')
   async getadminJobs(@Response() res: any, @Request() req: any): Promise<any> {
@@ -90,7 +87,7 @@ export class JobController {
     FilesInterceptor('file', 20, {
       storage: diskStorage({
         destination: './public/resume',
-        filename: function (req, file, cb) {
+        filename(req, file, cb) {
           cb(null, Date.now() + file.originalname);
         },
       }),
@@ -102,7 +99,7 @@ export class JobController {
     @Request() req: any,
     @Body() dto: applyJob,
     @UploadedFile()
-    file,
+      file,
   ): Promise<any> {
     const cv: any = req.files[0].filename;
     console.log('file', req.files);

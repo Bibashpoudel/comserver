@@ -4,16 +4,17 @@ import { IsNotEmpty, IsString } from 'class-validator';
 export class BlogDto {
   @IsString()
   @IsNotEmpty()
-  title: string;
+    title: string;
+
   @IsString()
   @IsNotEmpty()
-  content: Blob;
+    content: Blob;
 
   @IsNotEmpty()
-  categories: string;
+    categories: string;
 
   @IsNotEmpty()
-  tag: Array<string>;
+    tag: Array<string>;
 
   isTrue?: boolean = false;
 }
@@ -21,5 +22,5 @@ export class BlogDto {
 export class CategoriesDto {
   @IsString()
   @IsNotEmpty()
-  name: string;
+    name: string;
 }

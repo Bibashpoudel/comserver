@@ -1,4 +1,6 @@
-import { HttpStatus, Injectable, Request, Response } from '@nestjs/common';
+import {
+  HttpStatus, Injectable, Request, Response,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { nodeMailer } from 'src/global/nodeMailer';
@@ -104,6 +106,7 @@ export class JobService {
       );
     }
   }
+
   async getadminJobs(@Response() res: any, @Request() req: any) {
     try {
       const defaultSize: any = 10;
@@ -183,6 +186,7 @@ export class JobService {
       );
     }
   }
+
   async getAdminJobDetails(@Response() res: any, @Request() req: any, id: any) {
     try {
       const job = await this.jobModel.findOne({ _id: id });
@@ -213,8 +217,8 @@ export class JobService {
 
   async getJob(@Response() res: any, @Request() req: any) {
     try {
-      const slug = req.params.slug;
-      const job = await this.jobModel.findOne({ slug: slug });
+      const { slug } = req.params;
+      const job = await this.jobModel.findOne({ slug });
       if (job) {
         return sendResponse(
           res,
@@ -241,7 +245,7 @@ export class JobService {
 
   async updateJobs(@Response() res: any, @Request() req: any, dto: any) {
     try {
-      const id = req.params.id;
+      const { id } = req.params;
       console.log({ dto });
       const job = await this.jobModel.findOne({ _id: id });
       if (job) {
@@ -279,8 +283,8 @@ export class JobService {
   async applyJobs(
     @Response() res: any,
     @Request() req: any,
-    dto: any,
-    file: any,
+      dto: any,
+      file: any,
   ) {
     try {
       console.log(dto, file);
@@ -307,7 +311,7 @@ export class JobService {
         true,
         null,
         null,
-        `Your Resume has been submitted`,
+        'Your Resume has been submitted',
         null,
       );
     } catch (error) {
@@ -336,7 +340,7 @@ export class JobService {
       const { selected } = req.query;
 
       if (selected != '') {
-        searchq = { selected: selected };
+        searchq = { selected };
       }
       if (req.query.page && !isNaN(req.query.page) && req.query.page != 0) {
         page = Math.abs(req.query.page);

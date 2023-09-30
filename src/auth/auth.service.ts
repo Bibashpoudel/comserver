@@ -1,4 +1,4 @@
-import { HttpStatus, Injectable, Response } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -22,29 +22,28 @@ export class AuthService {
 
     if (!user) {
       return {
-        user: user,
+        user,
         status: false,
         message: 'Invalid Username Or Password',
       };
-    } else {
-      const isMatch = await bcrypt.compare(password, user.password);
-      if (isMatch) {
-        user.password = null;
-        return user;
-      } else {
-        return { message: 'Invalid Username Or Password', status: false };
-      }
     }
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (isMatch) {
+      user.password = null;
+      return user;
+    }
+    return { message: 'Invalid Username Or Password', status: false };
   }
 
   async login(user: any) {
     console.log(user);
     return {
-      access_token: this.jwtService.sign({ user: user, sub: 1 }),
+      access_token: this.jwtService.sign({ user, sub: 1 }),
       name: user.fullName,
       role: user.role,
     };
   }
+
   async userName(username: any) {
     try {
       const user = await this.userModel.findOne({ email: username });

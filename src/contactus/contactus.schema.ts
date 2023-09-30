@@ -6,15 +6,19 @@ export type contactUsDocument = Contactus & Document;
 @Schema()
 export class Contactus {
   @Prop()
-  email: string;
+    email: string;
+
   @Prop()
-  fullName: string;
+    fullName: string;
+
   @Prop()
-  phone?: string;
+    phone?: string;
+
   @Prop()
-  message: string;
+    message: string;
+
   @Prop({ default: false })
-  isReply: boolean;
+    isReply: boolean;
 }
 
 export const contactusSchema = SchemaFactory.createForClass(Contactus);
