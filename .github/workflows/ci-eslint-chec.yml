@@ -38,14 +38,14 @@ jobs: # list of things to do
         with:
           cmd: install
 
-      - name: Install Node.js dependencies `${{ inputs.project }}`
-        run: yarn
-
       - name: Code Checkout
         uses: actions/checkout@v3
 
+      - name: Install Node.js dependencies `${{ inputs.project }}`
+        run: yarn
+
       - name: Code Linting
-        run: yarn run lint
+        run: yarn lint
 
       - name: Fail if eslint made any changes
         run: |
